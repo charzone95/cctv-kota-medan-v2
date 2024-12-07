@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "400937935400",
+    "project_id": "cctv-kota-medan-v2-38ffa",
+    "storage_bucket": "cctv-kota-medan-v2-38ffa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400937935400:android:5dfac0dd37dd168b26cb1d",
+        "android_client_info": {
+          "package_name": "id.web.charzone95.cctv_kota_medan_v2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqiaar6HddJyY1xxIuWaqKm_9Et5E4NUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

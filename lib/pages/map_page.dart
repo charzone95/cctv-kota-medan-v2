@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:cctv_kota_medan_v2/pages/player_page.dart';
+import 'package:cctv_kota_medan_v2/pages/player_display.dart';
 import 'package:cctv_kota_medan_v2/states/camera_state.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class MapPage extends StatelessWidget {
@@ -88,12 +89,10 @@ class _MapDisplayState extends State<MapDisplay> {
                 double.parse(camera.lng),
               ),
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PlayerScreen(
-                      title: camera.name,
-                      url: camera.url,
-                    ),
+                showMaterialModalBottomSheet(
+                  context: context,
+                  builder: (context) => PlayerDisplay(
+                    camera: camera,
                   ),
                 );
               },

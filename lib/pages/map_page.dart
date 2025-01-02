@@ -119,7 +119,7 @@ class _MapDisplayState extends State<MapDisplay> {
             },
             markers: markerSet,
             myLocationEnabled: true,
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(12.0).copyWith(top: 60.0),
           );
         },
       ),

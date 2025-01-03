@@ -31,6 +31,8 @@ class _MapDisplayState extends State<MapDisplay> {
       Completer<GoogleMapController>();
 
   GoogleMapController? controller;
+  final double _modalHeight = 600.0;
+  bool _isModalShown = false;
 
   @override
   void initState() {
@@ -88,38 +90,53 @@ class _MapDisplayState extends State<MapDisplay> {
                 double.parse(camera.lat),
                 double.parse(camera.lng),
               ),
-              onTap: () {
-                showMaterialModalBottomSheet(
+              onTap: () async {
+                setState(() {
+                  _isModalShown = true;
+                });
+                await showMaterialModalBottomSheet(
                   context: context,
                   builder: (context) => PlayerDisplay(
                     camera: camera,
+                    height: _modalHeight,
                   ),
                 );
+
+                setState(() {
+                  _isModalShown = false;
+                });
               },
             );
 
             markerSet.add(marker);
           }
 
-          return GoogleMap(
-            mapType: MapType.normal,
-            initialCameraPosition: const CameraPosition(
-              target: LatLng(3.585, 98.675),
-              zoom: 16,
-            ),
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-              this.controller = controller;
+          return Column(
+            children: [
+              Expanded(
+                child: GoogleMap(
+                  mapType: MapType.normal,
+                  initialCameraPosition: const CameraPosition(
+                    target: LatLng(3.585, 98.675),
+                    zoom: 16,
+                  ),
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                    this.controller = controller;
 
-              _getCurrentPosition().then((position) {
-                controller.moveCamera(CameraUpdate.newLatLng(
-                  LatLng(position.latitude, position.longitude),
-                ));
-              });
-            },
-            markers: markerSet,
-            myLocationEnabled: true,
-            padding: const EdgeInsets.all(12.0).copyWith(top: 60.0),
+                    _getCurrentPosition().then((position) {
+                      controller.moveCamera(CameraUpdate.newLatLng(
+                        LatLng(position.latitude, position.longitude),
+                      ));
+                    });
+                  },
+                  markers: markerSet,
+                  myLocationEnabled: true,
+                  padding: const EdgeInsets.all(12.0).copyWith(top: 60.0),
+                ),
+              ),
+              Container(height: _isModalShown ? _modalHeight : 0),
+            ],
           );
         },
       ),

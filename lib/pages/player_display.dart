@@ -6,10 +6,12 @@ import 'package:video_player/video_player.dart';
 class PlayerDisplay extends StatefulWidget {
   const PlayerDisplay({
     required this.camera,
+    required this.height,
     super.key,
   });
 
   final CameraModel camera;
+  final double height;
 
   @override
   State<PlayerDisplay> createState() => _PlayerDisplayState();
@@ -82,7 +84,7 @@ class _PlayerDisplayState extends State<PlayerDisplay> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 500.0,
+      height: widget.height,
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
